@@ -1,5 +1,12 @@
 Revision history for Sub-Future
 
+0.03    Sat Dec 26 22:12:59 UTC 2009
+        Minor documentation clarifications
+        Standardize POD capitalization
+        Broaden the module summary
+        Mention subs::parallel
+        Mention more related modules
+
 0.02    Sat Dec 12 04:10:36 UTC 2009
         Include details about version control
 
