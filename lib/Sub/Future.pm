@@ -136,7 +136,7 @@ L<http://github.com/mndrix/Sub-Future>
 
 L<http://en.wikipedia.org/wiki/Futures_and_promises>
 
-L<subs::parallel>
+L<threads>, L<forks>, L<subs::parallel>, L<Async>
 
 =head1 COPYRIGHT & LICENSE
 
