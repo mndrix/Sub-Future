@@ -20,7 +20,7 @@ BEGIN {
 
 =head1 NAME
 
-Sub::Future - concurrency with futures
+Sub::Future - asynchronous programming with futures (or promises)
 
 =cut
 
