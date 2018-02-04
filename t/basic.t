@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 10;
+use Test::More tests => 12;
 use Sub::Future;
 
 # a scalar return value with explicit usage
@@ -35,4 +35,11 @@ use Sub::Future;
     my $later = future { sleep 3; return scalar time; };
     cmp_ok(time - $start, '<=', 1, 'future returns instantly');
     cmp_ok($later, '>', 2, 'blocks until the future is ready');
+}
+
+# make sure stdout/stderr does not interfere with return value's capturing
+{
+    my $value = future { print "Hello, World from the future!\n"; 42; };
+    is "$value", 42, "a quick scalar return without capturing stdout";
+    is "$value", 42, ".. still has the same value";
 }

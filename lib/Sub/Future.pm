@@ -53,21 +53,25 @@ until the value is ready.
 
 sub future(&) {
     my ($code) = @_;
-    
+    my ($reader, $writer);
+
+    # open bidirectional pipe
+    pipe($reader, $writer) || die "Can't open pipe: $!\n";
+
     # create a new process to handle the spawned calculation
-    my $pid = open my $fh, '-|';
+    my $pid = fork();
     die "Unable to fork: $!\n" if not defined $pid;
 
     # the child process performs the calculation
     if ( not $pid ) {
         my $value = $code->();
         my $frozen = freeze { returned => $value };
-        print $frozen;
+        print $writer $frozen;
         exit;    # the calculation is finished
     }
 
     # the parent process returns immediately
-    return bless { pid => $pid, fh => $fh }, __PACKAGE__;
+    return bless { pid => $pid, reader => $reader }, __PACKAGE__;
 }
 
 =head1 METHODS
@@ -94,8 +98,8 @@ sub value {
     }
 
     # retrieve the calculated value
-    my $fh     = $self->{fh};
-    my $frozen = do { local $/; <$fh> };
+    my $reader = $self->{reader};
+    my $frozen = do { local $/; <$reader> };
     my $v      = $self->{value} = thaw($frozen)->{returned};
 
     # wait on the child to exit
