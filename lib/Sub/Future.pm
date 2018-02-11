@@ -24,7 +24,7 @@ Sub::Future - asynchronous programming with futures (or promises)
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
