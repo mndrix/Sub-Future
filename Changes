@@ -1,5 +1,8 @@
 Revision history for Sub-Future
 
+0.04    Sun Feb 04 13:08:20 UTC 2018
+        Named pipes instead of stdout to ensure working serialization
+
 0.03    Sat Dec 26 22:12:59 UTC 2009
         Minor documentation clarifications
         Standardize POD capitalization
